@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>César Monchablon — Portfolio</title>
+  <meta name="description" content="Site personnel de César Monchablon." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>" />
+  <style>
+    :root {
+      --bg: #0f1117;
+      --bg-soft: #161922;
+      --text: #e7e9ee;
+      --text-muted: #9aa0ad;
+      --accent: #7c9cff;
+      --border: #232734;
+      --radius: 14px;
+      --max: 880px;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #fafafa;
+        --bg-soft: #ffffff;
+        --text: #14171c;
+        --text-muted: #5b6473;
+        --accent: #2c5cff;
+        --border: #e6e8ef;
+      }
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container { max-width: var(--max); margin: 0 auto; padding: 64px 24px; }
+    header.hero { display: flex; align-items: center; gap: 24px; margin-bottom: 56px; }
+    .avatar {
+      width: 84px; height: 84px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), #b07cff);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 32px; font-weight: 700; color: white; flex-shrink: 0;
+    }
+    .hero h1 { margin: 0 0 4px; font-size: 28px; letter-spacing: -0.5px; }
+    .hero p { margin: 0; color: var(--text-muted); }
+    section { margin-bottom: 48px; }
+    section h2 {
+      font-size: 14px; text-transform: uppercase; letter-spacing: 1.5px;
+      color: var(--text-muted); font-weight: 600; margin: 0 0 16px;
+    }
+    section p { margin: 0 0 12px; }
+    .projects { display: grid; gap: 16px; }
+    .card {
+      background: var(--bg-soft); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 20px 22px;
+      transition: transform 0.15s ease, border-color 0.15s ease;
+    }
+    .card:hover { transform: translateY(-2px); border-color: var(--accent); }
+    .card h3 { margin: 0 0 6px; font-size: 17px; }
+    .card p { margin: 0; color: var(--text-muted); font-size: 15px; }
+    .links { display: flex; flex-wrap: wrap; gap: 12px; }
+    .links a {
+      border: 1px solid var(--border); padding: 8px 14px;
+      border-radius: 999px; font-size: 14px; color: var(--text);
+    }
+    .links a:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+    footer {
+      margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--border);
+      color: var(--text-muted); font-size: 13px;
+    }
+    @media (max-width: 520px) {
+      .container { padding: 40px 20px; }
+      header.hero { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .hero h1 { font-size: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <header class="hero">
+      <div class="avatar" aria-hidden="true">CM</div>
+      <div>
+        <h1>César Monchablon</h1>
+        <p>Quelques mots pour te présenter en une phrase.</p>
+      </div>
+    </header>
+    <section id="about">
+      <h2>À propos</h2>
+      <p>Bienvenue ! Je suis César. Remplace ce paragraphe par une présentation de toi : ce que tu fais, ce qui t'intéresse, ce sur quoi tu travailles en ce moment.</p>
+      <p>Tu peux ajouter ici ton parcours, tes domaines d'expertise, ou simplement quelques pensées qui te ressemblent.</p>
+    </section>
+    <section id="projects">
+      <h2>Projets</h2>
+      <div class="projects">
+        <article class="card"><h3>Projet 1 — Titre</h3><p>Brève description : qu'est-ce que c'est, ton rôle, ce que tu en as appris.</p></article>
+        <article class="card"><h3>Projet 2 — Titre</h3><p>Une autre réalisation. Tu peux mettre un lien vers une démo ou un repo GitHub.</p></article>
+        <article class="card"><h3>Projet 3 — Titre</h3><p>Ajoute, retire ou réorganise ces cartes selon ce que tu veux mettre en avant.</p></article>
+      </div>
+    </section>
+    <section id="contact">
+      <h2>Contact</h2>
+      <div class="links">
+        <a href="mailto:cesar.monchablon@gmail.com">Email</a>
+        <a href="https://github.com/Deatpool" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://x.com/" target="_blank" rel="noopener">X / Twitter</a>
+      </div>
+    </section>
+    <footer><p>© <span id="year"></span> César Monchablon — Hébergé avec GitHub Pages.</p></footer>
+  </main>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
