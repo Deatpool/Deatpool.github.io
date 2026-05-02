@@ -1,118 +1,947 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>César Monchablon — Portfolio</title>
-  <meta name="description" content="Site personnel de César Monchablon." />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>" />
-  <style>
-    :root {
-      --bg: #0f1117;
-      --bg-soft: #161922;
-      --text: #e7e9ee;
-      --text-muted: #9aa0ad;
-      --accent: #7c9cff;
-      --border: #232734;
-      --radius: 14px;
-      --max: 880px;
-    }
-    @media (prefers-color-scheme: light) {
-      :root {
-        --bg: #fafafa;
-        --bg-soft: #ffffff;
-        --text: #14171c;
-        --text-muted: #5b6473;
-        --accent: #2c5cff;
-        --border: #e6e8ef;
-      }
-    }
-    * { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
-    a { color: var(--accent); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    .container { max-width: var(--max); margin: 0 auto; padding: 64px 24px; }
-    header.hero { display: flex; align-items: center; gap: 24px; margin-bottom: 56px; }
-    .avatar {
-      width: 84px; height: 84px; border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent), #b07cff);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 32px; font-weight: 700; color: white; flex-shrink: 0;
-    }
-    .hero h1 { margin: 0 0 4px; font-size: 28px; letter-spacing: -0.5px; }
-    .hero p { margin: 0; color: var(--text-muted); }
-    section { margin-bottom: 48px; }
-    section h2 {
-      font-size: 14px; text-transform: uppercase; letter-spacing: 1.5px;
-      color: var(--text-muted); font-weight: 600; margin: 0 0 16px;
-    }
-    section p { margin: 0 0 12px; }
-    .projects { display: grid; gap: 16px; }
-    .card {
-      background: var(--bg-soft); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 20px 22px;
-      transition: transform 0.15s ease, border-color 0.15s ease;
-    }
-    .card:hover { transform: translateY(-2px); border-color: var(--accent); }
-    .card h3 { margin: 0 0 6px; font-size: 17px; }
-    .card p { margin: 0; color: var(--text-muted); font-size: 15px; }
-    .links { display: flex; flex-wrap: wrap; gap: 12px; }
-    .links a {
-      border: 1px solid var(--border); padding: 8px 14px;
-      border-radius: 999px; font-size: 14px; color: var(--text);
-    }
-    .links a:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
-    footer {
-      margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--border);
-      color: var(--text-muted); font-size: 13px;
-    }
-    @media (max-width: 520px) {
-      .container { padding: 40px 20px; }
-      header.hero { flex-direction: column; align-items: flex-start; gap: 16px; }
-      .hero h1 { font-size: 24px; }
-    }
-  </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>César Monchablon — UX Designer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&display=swap" rel="stylesheet"/>
+<style>
+/* ─── RESET ──────────────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --font:'DM Sans',system-ui,sans-serif;
+  --bg:#ffffff;
+  --dark:#000000;
+  --text:#111111;
+  --muted:#6b6b6b;
+  --border:rgba(0,0,0,0.09);
+  --border-w:rgba(255,255,255,0.1);
+  --accent:#0051ff;
+  --r:16px;
+  --nav:56px;
+}
+
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+
+/* ─── NAV ────────────────────────────────────────────────────── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  height:var(--nav);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 24px;
+  background:rgba(0,0,0,0.8);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border-w);
+}
+.nav-logo{font-size:15px;font-weight:700;color:#fff;text-decoration:none;letter-spacing:-0.02em}
+.nav-links{display:flex;align-items:center;gap:8px}
+.nav-links a{font-size:13px;font-weight:500;color:rgba(255,255,255,0.6);text-decoration:none;padding:6px 12px;border-radius:8px;transition:color .15s,background .15s}
+.nav-links a:hover{color:#fff;background:rgba(255,255,255,0.08)}
+.nav-cta{background:#fff !important;color:#000 !important;border-radius:20px;font-weight:600}
+.nav-cta:hover{background:rgba(255,255,255,0.88) !important}
+
+/* ─── HERO ───────────────────────────────────────────────────── */
+#hero{
+  background:var(--dark);
+  padding-top:var(--nav);
+  display:flex;flex-direction:column;align-items:center;
+  text-align:center;
+  overflow:hidden;
+  position:relative;
+  min-height:100svh;
+}
+
+/* Video background */
+.hero-video-wrap{
+  position:absolute;inset:0;z-index:0;
+  overflow:hidden;
+}
+.hero-video-wrap video{
+  width:100%;height:100%;object-fit:cover;
+  filter:saturate(0.75) brightness(0.55);
+}
+/* Fallback animated gradient (shows if video fails) */
+.hero-video-fallback{
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,#1a0e08 0%,#2d1a0e 25%,#0e1520 50%,#1a1030 75%,#0a0a14 100%);
+  background-size:400% 400%;
+  animation:gradShift 18s ease infinite;
+}
+/* Film grain via SVG filter */
+.hero-video-wrap::after{
+  content:'';
+  position:absolute;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events:none;mix-blend-mode:overlay;
+}
+/* Gradient overlays — cinematic Apple style */
+.hero-overlay{
+  position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:
+    /* top dark fade for nav */
+    linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, transparent 30%),
+    /* bottom dark fade for text readability */
+    linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 50%, transparent 100%),
+    /* subtle vignette edges */
+    radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.35) 100%);
+}
+
+.hero-inner{
+  width:100%;max-width:900px;
+  padding:72px 24px 0;
+  display:flex;flex-direction:column;align-items:center;
+  position:relative;z-index:2;
+}
+
+@keyframes gradShift{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:12px;font-weight:500;
+  color:rgba(255,255,255,0.5);
+  border:1px solid rgba(255,255,255,0.12);
+  border-radius:20px;padding:5px 14px;margin-bottom:32px;
+  opacity:0;animation:fadeUp .6s .1s forwards;
+}
+.hero-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0}
+.hero-h1{
+  font-size:clamp(48px,7.5vw,96px);
+  font-weight:800;letter-spacing:-0.045em;line-height:1;
+  color:#fff;margin-bottom:20px;
+  opacity:0;animation:fadeUp .7s .2s cubic-bezier(.16,1,.3,1) forwards;
+}
+.hero-h1 em{font-style:normal;color:rgba(255,255,255,0.35)}
+.hero-sub{
+  font-size:17px;font-weight:400;line-height:1.55;
+  color:rgba(255,255,255,0.5);max-width:480px;margin-bottom:36px;
+  opacity:0;animation:fadeUp .7s .35s forwards;
+}
+.hero-btns{
+  display:flex;align-items:center;gap:12px;margin-bottom:64px;
+  opacity:0;animation:fadeUp .7s .45s forwards;
+}
+.btn-f{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:14px;font-weight:600;
+  background:#fff;color:#000;
+  padding:10px 20px;border-radius:20px;text-decoration:none;
+  transition:opacity .15s,transform .2s;
+}
+.btn-f:hover{opacity:.88;transform:scale(1.02)}
+.btn-ghost{
+  font-size:14px;font-weight:500;color:rgba(255,255,255,0.6);
+  text-decoration:none;transition:color .15s;
+  display:inline-flex;align-items:center;gap:4px;
+}
+.btn-ghost:hover{color:#fff}
+.btn-ghost::after{content:'→';display:inline-block;transition:transform .2s}
+.btn-ghost:hover::after{transform:translateX(3px)}
+
+/* ─── SCROLL PHONE HERO ──────────────────────────────────────── */
+#scroll-hero{height:225vh;background:var(--dark);position:relative}
+.sh-sticky{
+  position:sticky;top:0;height:100vh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:0;overflow:hidden;
+}
+.sh-label{
+  font-size:13px;font-weight:500;letter-spacing:0;
+  color:rgba(255,255,255,0.4);margin-bottom:24px;
+  position:relative;z-index:2;
+  opacity:0;transform:translateY(8px);
+  transition:opacity .5s,transform .5s;
+}
+.sh-label.sl-in{opacity:1;transform:none}
+.sh-title{
+  font-size:clamp(24px,3.5vw,48px);font-weight:800;
+  letter-spacing:-0.04em;line-height:1.05;color:#fff;
+  text-align:center;max-width:600px;margin-bottom:40px;
+  position:relative;z-index:2;min-height:60px;
+}
+/* iPhone portrait */
+.iph{
+  width:260px;height:min(520px,calc(100vh - 280px));
+  border-radius:50px;
+  background:#1c1c1e;
+  border:1.5px solid rgba(255,255,255,0.12);
+  box-shadow:0 0 0 1px rgba(255,255,255,.04),0 60px 120px rgba(0,0,0,0.85),inset 0 1px 0 rgba(255,255,255,.08);
+  overflow:hidden;position:relative;z-index:1;flex-shrink:0;
+}
+.iph-notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:110px;height:28px;background:#000;border-radius:0 0 22px 22px;z-index:10}
+/* Screens */
+.pscreen{
+  position:absolute;inset:0;padding:42px 16px 18px;
+  display:flex;flex-direction:column;
+  opacity:0;transform:translateY(12px);
+  transition:opacity .5s cubic-bezier(.4,0,.2,1),transform .5s cubic-bezier(.4,0,.2,1);
+}
+.pscreen.psa{opacity:1;transform:none}
+.pscreen.psu{transform:translateY(-12px)}
+/* Phase dots */
+.sh-dots{display:flex;gap:6px;margin-top:28px;position:relative;z-index:2}
+.sh-dot{height:6px;width:6px;border-radius:3px;background:rgba(255,255,255,.2);transition:width .35s,background .35s}
+.sh-dot.sda{width:20px;background:#fff}
+/* Hand */
+.hand-w{position:absolute;z-index:20;pointer-events:none;transform:translate(-50%,-82%);transition:left .7s cubic-bezier(.16,1,.3,1),top .7s cubic-bezier(.16,1,.3,1)}
+@keyframes hTap{0%{transform:translate(-50%,-82%) scale(1) translateY(0)}35%{transform:translate(-50%,-82%) scale(.92) translateY(7px)}100%{transform:translate(-50%,-82%) scale(1) translateY(0)}}
+.htap{animation:hTap .45s cubic-bezier(.16,1,.3,1)}
+
+/* ─── SECTION COMMON ─────────────────────────────────────────── */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s cubic-bezier(.4,0,.2,1),transform .7s cubic-bezier(.4,0,.2,1)}
+.reveal.rin{opacity:1;transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
+
+.wrap{max-width:1100px;margin:0 auto;padding:0 32px}
+
+.tag{
+  display:inline-flex;align-items:center;
+  font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:16px;
+}
+
+/* ─── FEATURE TABS ───────────────────────────────────────────── */
+#features{background:var(--bg);padding:120px 0}
+.feat-head{text-align:center;margin-bottom:56px}
+.feat-head h2{
+  font-size:clamp(36px,5vw,64px);font-weight:800;
+  letter-spacing:-0.04em;line-height:1.05;color:var(--text);
+}
+.feat-tabs{
+  display:flex;justify-content:center;gap:4px;
+  margin-bottom:32px;
+  background:rgba(0,0,0,0.04);
+  border-radius:12px;padding:4px;
+  width:fit-content;margin-left:auto;margin-right:auto;
+}
+.feat-tab{
+  font-size:13px;font-weight:600;color:var(--muted);
+  padding:8px 18px;border-radius:9px;border:none;background:transparent;
+  cursor:pointer;transition:color .2s,background .2s;white-space:nowrap;
+}
+.feat-tab.active{background:#fff;color:var(--text);box-shadow:0 1px 4px rgba(0,0,0,.1)}
+.feat-panels{position:relative}
+.feat-panel{
+  display:none;
+  background:var(--dark);border-radius:20px;overflow:hidden;
+  display:grid;grid-template-columns:1fr 1fr;min-height:480px;
+  opacity:0;transition:opacity .4s;
+}
+.feat-panel.fp-active{display:grid;opacity:1}
+.feat-panel-info{
+  padding:56px;display:flex;flex-direction:column;justify-content:center;
+}
+.feat-panel-tag{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:20px}
+.feat-panel-title{font-size:clamp(24px,2.5vw,36px);font-weight:800;letter-spacing:-0.03em;line-height:1.1;color:#fff;margin-bottom:20px}
+.feat-panel-body{font-size:15px;line-height:1.7;color:rgba(255,255,255,.55);margin-bottom:32px}
+.feat-panel-chips{display:flex;flex-wrap:wrap;gap:8px}
+.feat-chip{font-size:12px;font-weight:500;border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:4px 12px;color:rgba(255,255,255,.5)}
+.feat-panel-visual{
+  background:rgba(255,255,255,.03);
+  display:flex;align-items:flex-end;justify-content:center;
+  padding:40px 40px 0;overflow:hidden;
+  position:relative;
+}
+.feat-mockup{
+  background:#f5f5f7;border-radius:16px 16px 0 0;
+  width:100%;max-width:320px;
+  box-shadow:0 -16px 60px rgba(0,0,0,.3);
+  overflow:hidden;min-height:280px;
+  border:1px solid rgba(255,255,255,.08);border-bottom:none;
+}
+.feat-mockup-dark{background:#1c1c1e}
+
+/* ─── CONVICTIONS ────────────────────────────────────────────── */
+#convictions{background:var(--dark);padding:120px 0}
+.conv-head{margin-bottom:72px}
+.conv-head h2{font-size:clamp(36px,5vw,64px);font-weight:800;letter-spacing:-0.04em;line-height:1.05;color:#fff}
+.conv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.07);border-radius:16px;overflow:hidden}
+.conv-card{background:var(--dark);padding:48px 40px;transition:background .2s}
+.conv-card:hover{background:#0a0a0a}
+.conv-n{font-size:11px;font-weight:700;letter-spacing:.1em;color:rgba(255,255,255,.25);text-transform:uppercase;margin-bottom:20px}
+.conv-txt{font-size:17px;line-height:1.65;color:rgba(255,255,255,.6)}
+
+/* ─── COMPANIES ──────────────────────────────────────────────── */
+#companies{background:var(--bg);padding:80px 0;border-top:1px solid var(--border);overflow:hidden}
+.comp-label{text-align:center;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:40px}
+.marquee-outer{overflow:hidden;position:relative}
+.marquee-outer::before,.marquee-outer::after{content:'';position:absolute;top:0;bottom:0;z-index:1;width:100px;pointer-events:none}
+.marquee-outer::before{left:0;background:linear-gradient(to right,#fff,transparent)}
+.marquee-outer::after{right:0;background:linear-gradient(to left,#fff,transparent)}
+.marquee-track{display:flex;gap:12px;width:max-content;animation:mq 22s linear infinite}
+.comp-tile{display:inline-flex;flex-direction:column;align-items:flex-start;background:#f5f5f7;border-radius:12px;padding:18px 24px;min-width:160px}
+.comp-name{font-size:14px;font-weight:700;letter-spacing:-0.01em;color:var(--text)}
+.comp-role{font-size:11px;color:var(--muted);margin-top:2px}
+.comp-badge{font-size:10px;font-weight:700;color:#1d8348;background:rgba(29,131,72,.1);border-radius:20px;padding:2px 8px;margin-top:6px}
+
+/* ─── PROJECTS ───────────────────────────────────────────────── */
+#projects{background:var(--bg);padding:120px 0}
+.proj-head{margin-bottom:72px}
+.proj-head h2{font-size:clamp(36px,5vw,64px);font-weight:800;letter-spacing:-0.04em;line-height:1.05;color:var(--text)}
+
+.proj-card{
+  background:var(--dark);border-radius:20px;overflow:hidden;
+  display:grid;grid-template-columns:1fr 1fr;
+  min-height:500px;margin-bottom:16px;
+  border:1px solid #111;
+  transition:transform .4s cubic-bezier(.16,1,.3,1);
+}
+.proj-card:hover{transform:translateY(-4px)}
+.proj-card.inv{grid-template-columns:1fr 1fr}
+.proj-card.light{background:#f5f5f7;border-color:var(--border)}
+.proj-info{padding:56px;display:flex;flex-direction:column;justify-content:space-between}
+.proj-meta{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:16px}
+.proj-meta-light{color:var(--muted)}
+.proj-title{font-size:clamp(28px,3vw,44px);font-weight:800;letter-spacing:-0.035em;line-height:1.05;color:#fff;margin-bottom:16px}
+.proj-title-dark{color:var(--text)}
+.proj-desc{font-size:15px;line-height:1.7;color:rgba(255,255,255,.5);margin-bottom:28px;flex:1}
+.proj-desc-dark{color:var(--muted)}
+.proj-tags{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:28px}
+.proj-tag{font-size:11px;font-weight:500;border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:3px 10px;color:rgba(255,255,255,.4)}
+.proj-tag-dark{border-color:var(--border);color:var(--muted)}
+.proj-link{font-size:14px;font-weight:600;color:rgba(255,255,255,.7);text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:color .15s}
+.proj-link:hover{color:#fff}
+.proj-link-dark{color:var(--accent)}
+.proj-link-dark:hover{color:#003dcc}
+.proj-link::after{content:'→';display:inline-block;transition:transform .2s}
+.proj-link:hover::after{transform:translateX(3px)}
+
+.proj-visual{
+  display:flex;align-items:flex-end;justify-content:center;
+  padding:40px 40px 0;overflow:hidden;position:relative;
+}
+.proj-phone{
+  width:200px;border-radius:32px 32px 0 0;
+  overflow:hidden;
+  box-shadow:0 -20px 60px rgba(0,0,0,.35);
+  border:1.5px solid rgba(255,255,255,.1);border-bottom:none;
+  flex-shrink:0;
+  transition:transform .4s cubic-bezier(.16,1,.3,1);
+}
+.proj-card:hover .proj-phone{transform:translateY(-10px)}
+.proj-phone-light{box-shadow:0 -20px 60px rgba(0,0,0,.12);border-color:rgba(0,0,0,.08)}
+
+/* ─── OTHER PROJECTS ─────────────────────────────────────────── */
+#other{background:var(--bg);padding:0 0 80px;border-top:1px solid var(--border)}
+.other-inner{max-width:1100px;margin:0 auto;padding:64px 32px 0}
+.other-h{font-size:14px;font-weight:600;color:var(--muted);margin-bottom:24px}
+.other-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.other-card{background:#f5f5f7;border-radius:var(--r);padding:28px;transition:background .2s}
+.other-card:hover{background:#ececec}
+.other-date{font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.other-title{font-size:16px;font-weight:700;letter-spacing:-0.02em;color:var(--text);margin-bottom:4px}
+.other-sub{font-size:13px;color:var(--muted)}
+
+/* ─── THINKING ───────────────────────────────────────────────── */
+#thinking{background:var(--bg);padding:120px 0;border-top:1px solid var(--border)}
+.think-head{margin-bottom:56px;display:flex;justify-content:space-between;align-items:flex-end}
+.think-head h2{font-size:clamp(36px,5vw,64px);font-weight:800;letter-spacing:-0.04em;line-height:1.05}
+.think-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.think-card{background:#f5f5f7;border-radius:var(--r);overflow:hidden;transition:transform .3s,background .2s}
+.think-card:hover{transform:translateY(-4px);background:#ededec}
+.think-img{height:160px;display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--border)}
+.think-body{padding:24px}
+.think-cat{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+.think-title{font-size:17px;font-weight:700;letter-spacing:-0.022em;line-height:1.3;color:var(--text);margin-bottom:8px}
+.think-excerpt{font-size:13px;line-height:1.65;color:var(--muted)}
+
+/* ─── ABOUT ──────────────────────────────────────────────────── */
+#about{background:var(--dark);padding:120px 0;border-top:1px solid #111}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:start}
+.about-h{font-size:clamp(32px,4vw,52px);font-weight:800;letter-spacing:-0.038em;line-height:1.08;color:#fff;margin-bottom:0}
+.about-h em{font-style:normal;color:rgba(255,255,255,.3)}
+.about-items{display:flex;flex-direction:column}
+.about-item{padding:28px 0;border-top:1px solid rgba(255,255,255,.07)}
+.about-lbl{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:10px}
+.about-txt{font-size:15px;line-height:1.7;color:rgba(255,255,255,.55)}
+
+/* ─── CONTACT ────────────────────────────────────────────────── */
+#contact{background:var(--dark);padding:0 32px 80px}
+.contact-grid{display:grid;grid-template-columns:1fr 2fr;gap:12px;max-width:1100px;margin:0 auto}
+.c-id{background:#111;border-radius:20px;padding:44px;display:flex;flex-direction:column;justify-content:space-between;min-height:340px}
+.c-name{font-size:30px;font-weight:800;letter-spacing:-0.03em;line-height:1.1;color:#fff}
+.c-role{font-size:13px;color:rgba(255,255,255,.35);margin-top:6px}
+.c-links{display:flex;flex-direction:column;gap:8px}
+.c-link{font-size:15px;font-weight:500;color:var(--accent);text-decoration:none;transition:opacity .15s}
+.c-link:hover{opacity:.7}
+.c-cta{
+  background:var(--accent);border-radius:20px;padding:52px 56px;
+  display:flex;flex-direction:column;justify-content:space-between;
+  min-height:340px;position:relative;overflow:hidden;
+}
+.c-cta::after{content:'';position:absolute;top:-60px;right:-60px;width:260px;height:260px;border-radius:50%;background:rgba(255,255,255,.08)}
+.c-cta-lbl{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.55)}
+.c-cta-h{font-size:clamp(40px,5.5vw,72px);font-weight:800;letter-spacing:-0.04em;line-height:1;color:#fff;position:relative;z-index:1}
+.c-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  background:#fff;color:var(--accent);
+  font-size:15px;font-weight:700;
+  padding:12px 24px;border-radius:20px;text-decoration:none;
+  width:fit-content;position:relative;z-index:1;
+  transition:opacity .15s,transform .2s;
+}
+.c-btn:hover{opacity:.92;transform:scale(1.02)}
+.footer-bar{max-width:1100px;margin:0 auto;padding-top:32px;border-top:1px solid #111;display:flex;justify-content:space-between;align-items:center}
+.footer-copy{font-size:12px;color:rgba(255,255,255,.25);letter-spacing:-0.01em}
+
+/* ─── KEYFRAMES ──────────────────────────────────────────────── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+</style>
 </head>
 <body>
-  <main class="container">
-    <header class="hero">
-      <div class="avatar" aria-hidden="true">CM</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">César Monchablon</a>
+  <div class="nav-links">
+    <a href="#features">À propos</a>
+    <a href="#projects">Projets</a>
+    <a href="#thinking">Thinking</a>
+    <a href="#contact" class="nav-cta">Discutons</a>
+  </div>
+</nav>
+
+<!-- HERO (static) -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-badge"><div class="hero-badge-dot"></div>Lead UX Designer · Desjardins · Montréal</div>
+    <h1 class="hero-h1">Concevoir des expériences<br><em>financières</em> simples,<br>humaines et durables.</h1>
+    <p class="hero-sub">À l'intersection de l'UX, de la stratégie produit et de l'innovation fintech — avec une obsession : des expériences qui ont un impact réel.</p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn-f">Voir les projets</a>
+      <a href="#contact" class="btn-ghost">Discutons</a>
+    </div>
+  </div>
+</section>
+
+<!-- SCROLL PHONE -->
+<section id="scroll-hero">
+  <div class="sh-sticky" id="shSticky">
+    <!-- Phase title -->
+    <div class="sh-label" id="shLabel">Navigation en direct</div>
+    <div class="sh-title" id="shTitle">Concevoir des expériences<br>qui ont du sens.</div>
+
+    <!-- iPhone -->
+    <div style="position:relative" id="iphWrap">
+      <div class="iph" id="iphPortrait">
+        <div class="iph-notch"></div>
+
+        <!-- Screen 0 — Dashboard -->
+        <div class="pscreen psa" id="ps0" style="background:linear-gradient(160deg,#0d1228,#050a18)">
+          <div style="font-size:9px;color:rgba(255,255,255,.4);font-weight:600;display:flex;justify-content:space-between;margin-bottom:18px"><span>9:41</span><span>●●●</span></div>
+          <div style="font-size:10px;color:rgba(255,255,255,.35);margin-bottom:3px">Bonjour, César</div>
+          <div style="font-size:28px;font-weight:800;color:#fff;letter-spacing:-0.03em;margin-bottom:4px">14 280 $</div>
+          <div style="font-size:9px;color:#30D158;margin-bottom:14px">↑ +2,4% ce mois</div>
+          <div style="height:3px;background:rgba(255,255,255,.08);border-radius:2px;margin-bottom:18px"><div style="height:3px;background:#30D158;border-radius:2px;width:62%"></div></div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px">
+            <div style="aspect-ratio:1;background:rgba(0,81,255,.3);border-radius:10px;display:flex;align-items:center;justify-content:center"><div style="width:16px;height:16px;background:#0051ff;border-radius:5px"></div></div>
+            <div style="aspect-ratio:1;background:rgba(48,209,88,.2);border-radius:10px;display:flex;align-items:center;justify-content:center"><div style="width:16px;height:16px;background:#30D158;border-radius:5px"></div></div>
+            <div style="aspect-ratio:1;background:rgba(255,214,10,.15);border-radius:10px;display:flex;align-items:center;justify-content:center"><div style="width:16px;height:16px;background:#FFD60A;border-radius:5px"></div></div>
+            <div style="aspect-ratio:1;background:rgba(255,69,58,.15);border-radius:10px;display:flex;align-items:center;justify-content:center"><div style="width:16px;height:16px;background:#FF453A;border-radius:5px"></div></div>
+          </div>
+          <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:14px">
+            <div style="font-size:9px;color:rgba(255,255,255,.35);margin-bottom:3px">Épargne</div>
+            <div style="font-size:18px;font-weight:800;color:#fff;letter-spacing:-0.025em">8 400 $</div>
+          </div>
+        </div>
+
+        <!-- Screen 1 — Épargne -->
+        <div class="pscreen" id="ps1" style="background:#f5f5f7">
+          <div style="font-size:9px;color:#111;font-weight:600;display:flex;justify-content:space-between;margin-bottom:14px"><span>9:41</span><span>●●●</span></div>
+          <div style="font-size:10px;color:#6b6b6b;margin-bottom:2px">Fonds d'urgence</div>
+          <div style="font-size:28px;font-weight:800;color:#111;letter-spacing:-0.03em;margin-bottom:4px">8 400 $</div>
+          <div style="font-size:9px;color:#30D158;margin-bottom:12px">Objectif atteint à 68%</div>
+          <div style="height:3px;background:rgba(0,0,0,.08);border-radius:2px;margin-bottom:16px"><div style="height:3px;background:#30D158;border-radius:2px;width:68%"></div></div>
+          <div style="background:#fff;border-radius:14px;padding:14px;margin-bottom:8px;box-shadow:0 2px 10px rgba(0,0,0,.07)">
+            <div style="font-size:9px;color:#6b6b6b;margin-bottom:2px">Recommandé</div>
+            <div style="font-size:15px;font-weight:700;color:#111">3 mois de dépenses</div>
+          </div>
+          <div style="background:#fff;border-radius:14px;padding:14px;box-shadow:0 2px 10px rgba(0,0,0,.07)">
+            <div style="font-size:9px;color:#6b6b6b;margin-bottom:2px">PrioriTerre PGLM</div>
+            <div style="font-size:15px;font-weight:700;color:#111">5 880 $</div>
+            <div style="font-size:9px;color:#0051ff;margin-top:2px;font-weight:600">6,80% · Promo</div>
+          </div>
+        </div>
+
+        <!-- Screen 2 — Taux -->
+        <div class="pscreen" id="ps2" style="background:#f5f5f7">
+          <div style="font-size:9px;color:#111;font-weight:600;display:flex;justify-content:space-between;margin-bottom:12px"><span>9:41</span><span>●●●</span></div>
+          <div style="font-size:10px;color:#6b6b6b;margin-bottom:3px">Financement</div>
+          <div style="font-size:17px;font-weight:800;color:#111;letter-spacing:-0.02em;margin-bottom:14px">Choisissez votre taux</div>
+          <div style="background:#fff;border:2px solid #0051ff;border-radius:14px;padding:14px;margin-bottom:8px;box-shadow:0 4px 18px rgba(0,81,255,.18)">
+            <div style="font-size:9px;font-weight:700;color:#0051ff;background:rgba(0,81,255,.08);border-radius:4px;padding:2px 7px;display:inline-block;margin-bottom:6px">PROMO</div>
+            <div style="font-size:28px;font-weight:800;color:#0051ff;letter-spacing:-0.03em">6,80 %</div>
+            <div style="font-size:9px;color:#6b6b6b">Rendement par année</div>
+          </div>
+          <div style="background:rgba(0,0,0,.04);border-radius:14px;padding:14px;margin-bottom:14px">
+            <div style="font-size:22px;font-weight:800;color:#111;letter-spacing:-0.025em">1,00 %</div>
+            <div style="font-size:9px;color:#6b6b6b">Standard</div>
+          </div>
+          <div style="background:#0051ff;border-radius:12px;padding:12px;text-align:center;margin-top:auto">
+            <div style="font-size:12px;font-weight:700;color:#fff">Choisir et continuer</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hand SVG -->
+      <div class="hand-w" id="handWrap">
+        <svg width="86" height="164" viewBox="0 0 90 170" fill="none">
+          <defs>
+            <filter id="hsh" x="-40%" y="-10%" width="180%" height="150%"><feDropShadow dx="0" dy="14" stdDeviation="14" flood-color="rgba(0,0,0,0.5)"/></filter>
+            <linearGradient id="sk1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#F5C9A3"/><stop offset="100%" stop-color="#E8A87C"/></linearGradient>
+          </defs>
+          <g filter="url(#hsh)">
+            <path d="M10,96 C8,120 10,144 20,155 C27,163 63,163 73,155 C83,144 83,120 81,96 Z" fill="url(#sk1)"/>
+            <path d="M74,96 C76,84 81,80 85,86 C87,91 84,96 81,96 Z" fill="url(#sk1)"/>
+            <path d="M62,96 C63,81 68,77 73,81 C77,85 76,93 74,96 Z" fill="url(#sk1)"/>
+            <path d="M49,96 C49,80 55,75 61,79 C65,83 64,91 62,96 Z" fill="url(#sk1)"/>
+            <path d="M10,115 C3,112 -1,104 3,97 C7,90 15,88 21,94 L15,115 Z" fill="url(#sk1)"/>
+            <rect x="29" y="9" width="27" height="92" rx="13.5" fill="url(#sk1)"/>
+            <ellipse cx="42.5" cy="15" rx="13.5" ry="14" fill="url(#sk1)"/>
+            <path d="M35,10 Q42.5,4 50,10 L50,23 Q42.5,28 35,23 Z" fill="#FDECD8" opacity=".85"/>
+            <path d="M32,54 Q42.5,50 53,54" stroke="#C07848" stroke-width="1.2" fill="none" opacity=".3" stroke-linecap="round"/>
+            <path d="M32,66 Q42.5,62 53,66" stroke="#C07848" stroke-width="1.2" fill="none" opacity=".3" stroke-linecap="round"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Dots -->
+    <div class="sh-dots">
+      <div class="sh-dot sda" id="sd0"></div>
+      <div class="sh-dot" id="sd1"></div>
+      <div class="sh-dot" id="sd2"></div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURE TABS -->
+<section id="features">
+  <div class="wrap">
+    <div class="feat-head reveal">
+      <div class="tag">Ce que je fais</div>
+      <h2>Trois disciplines,<br>un seul objectif.</h2>
+    </div>
+
+    <div class="feat-tabs reveal">
+      <button class="feat-tab active" data-tab="0">UX &amp; Product Design</button>
+      <button class="feat-tab" data-tab="1">UX Strategy</button>
+      <button class="feat-tab" data-tab="2">Fintech &amp; Innovation</button>
+    </div>
+
+    <!-- Tab 0 -->
+    <div class="feat-panel fp-active reveal" id="fp0">
+      <div class="feat-panel-info">
+        <div class="feat-panel-tag">01 · UX &amp; Product Design</div>
+        <div class="feat-panel-title">Transformer la complexité en clarté.</div>
+        <div class="feat-panel-body">Je conçois des expériences numériques pour l'épargne, le financement et le conseil financier. De la vision stratégique aux livrables, je structure les parcours pour transformer des systèmes complexes en expériences cohérentes et utiles au bon moment.</div>
+        <div class="feat-panel-chips">
+          <span class="feat-chip">Journeys</span>
+          <span class="feat-chip">Blueprints</span>
+          <span class="feat-chip">Wireframes</span>
+          <span class="feat-chip">Prototypage</span>
+        </div>
+      </div>
+      <div class="feat-panel-visual">
+        <div class="feat-mockup" style="padding:20px 16px">
+          <div style="font-size:10px;color:#6b6b6b;margin-bottom:8px;font-weight:600">Blueprint de service</div>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <div style="background:#f0f0f0;border-radius:8px;padding:8px;font-size:10px;color:#111;font-weight:600">Parcours utilisateur</div>
+            <div style="background:#e8f0fe;border-radius:8px;padding:8px;font-size:10px;color:#0051ff;font-weight:600">Touchpoints digitaux</div>
+            <div style="background:#f0f0f0;border-radius:8px;padding:8px;font-size:10px;color:#111;font-weight:600">Processus back-office</div>
+            <div style="background:#e8f5ec;border-radius:8px;padding:8px;font-size:10px;color:#1d8348;font-weight:600">Données &amp; systèmes</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 1 -->
+    <div class="feat-panel" id="fp1">
+      <div class="feat-panel-info">
+        <div class="feat-panel-tag">02 · UX Strategy &amp; Product Thinking</div>
+        <div class="feat-panel-title">Intervenir là où se jouent les vraies décisions.</div>
+        <div class="feat-panel-body">J'interviens en amont des projets pour aider les équipes produit, légales et d'affaires à repenser les processus avant de les designer. À travers des ateliers de cadrage stratégique, j'aligne les enjeux d'affaires, les contraintes réglementaires et les besoins utilisateurs.</div>
+        <div class="feat-panel-chips">
+          <span class="feat-chip">Co-création</span>
+          <span class="feat-chip">Cadrage stratégique</span>
+          <span class="feat-chip">Alignement</span>
+          <span class="feat-chip">Product Thinking</span>
+        </div>
+      </div>
+      <div class="feat-panel-visual">
+        <div class="feat-mockup" style="padding:20px 16px">
+          <div style="font-size:10px;color:#6b6b6b;margin-bottom:12px;font-weight:600">Atelier de cadrage</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+            <div style="background:#fff3cd;border-radius:8px;padding:10px;font-size:9px;color:#856404;font-weight:600">Enjeux d'affaires</div>
+            <div style="background:#f8d7da;border-radius:8px;padding:10px;font-size:9px;color:#842029;font-weight:600">Contraintes légales</div>
+            <div style="background:#d1ecf1;border-radius:8px;padding:10px;font-size:9px;color:#0c5460;font-weight:600">Besoins utilisateurs</div>
+            <div style="background:#d4edda;border-radius:8px;padding:10px;font-size:9px;color:#155724;font-weight:600">Vision produit</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 2 -->
+    <div class="feat-panel" id="fp2">
+      <div class="feat-panel-info">
+        <div class="feat-panel-tag">03 · Fintech &amp; Innovation</div>
+        <div class="feat-panel-title">Faire le pont entre l'audace et la rigueur.</div>
+        <div class="feat-panel-body">Je maintiens une veille active sur les évolutions réglementaires et les nouveaux modèles produits. En analysant des acteurs comme Wealthsimple, Robinhood ou Revolut, j'identifie des leviers d'innovation applicables à grande échelle dans des environnements réglementés.</div>
+        <div class="feat-panel-chips">
+          <span class="feat-chip">Open banking</span>
+          <span class="feat-chip">Veille fintech</span>
+          <span class="feat-chip">Benchmark</span>
+          <span class="feat-chip">Innovation UX</span>
+        </div>
+      </div>
+      <div class="feat-panel-visual">
+        <div class="feat-mockup feat-mockup-dark" style="padding:20px 16px">
+          <div style="font-size:10px;color:rgba(255,255,255,.4);margin-bottom:12px;font-weight:600">Radar fintech</div>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <div style="display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.06);border-radius:8px;padding:8px 10px">
+              <span style="font-size:10px;color:#fff;font-weight:600">Wealthsimple</span>
+              <span style="font-size:9px;color:#30D158">●  Étudié</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.06);border-radius:8px;padding:8px 10px">
+              <span style="font-size:10px;color:#fff;font-weight:600">Revolut</span>
+              <span style="font-size:9px;color:#30D158">●  Étudié</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.06);border-radius:8px;padding:8px 10px">
+              <span style="font-size:10px;color:#fff;font-weight:600">Robinhood</span>
+              <span style="font-size:9px;color:#FFD60A">●  En cours</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONVICTIONS -->
+<section id="convictions">
+  <div class="wrap">
+    <div class="conv-head reveal">
+      <div class="tag" style="color:rgba(255,255,255,.3)">Ce qui me motive</div>
+      <h2>Trois convictions.<br>Chaque projet.</h2>
+    </div>
+    <div class="conv-grid reveal">
+      <div class="conv-card">
+        <div class="conv-n">01</div>
+        <p class="conv-txt">Redéfinir les produits et processus financiers pour les rendre plus simples, plus lisibles et réellement centrés sur les utilisateurs.</p>
+      </div>
+      <div class="conv-card">
+        <div class="conv-n">02</div>
+        <p class="conv-txt">M'assurer que chaque expérience numérique incarne fidèlement la promesse et l'identité de la marque, sans compromis sur la qualité.</p>
+      </div>
+      <div class="conv-card">
+        <div class="conv-n">03</div>
+        <p class="conv-txt">Explorer et intégrer de nouveaux outils, méthodes et technologies pour livrer plus vite des expériences de qualité.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPANIES -->
+<section id="companies">
+  <div class="comp-label reveal">Les places où j'ai travaillé</div>
+  <div class="marquee-outer">
+    <div class="marquee-track">
+      <div class="comp-tile"><span class="comp-name">Desjardins</span><span class="comp-role">Lead UX Designer</span><span class="comp-badge">Actuelle</span></div>
+      <div class="comp-tile"><span class="comp-name">Turbulences</span><span class="comp-role">UX Designer</span></div>
+      <div class="comp-tile"><span class="comp-name">UNIK</span><span class="comp-role">Product Designer</span></div>
+      <div class="comp-tile"><span class="comp-name">Cossette</span><span class="comp-role">UX Designer</span></div>
+      <div class="comp-tile"><span class="comp-name">FCINQ</span><span class="comp-role">Designer</span></div>
+      <div class="comp-tile"><span class="comp-name">M&amp;C Saatchi Paris</span><span class="comp-role">UX Designer</span></div>
+      <div class="comp-tile"><span class="comp-name">Desjardins</span><span class="comp-role">Lead UX Designer</span><span class="comp-badge">Actuelle</span></div>
+      <div class="comp-tile"><span class="comp-name">Turbulences</span><span class="comp-role">UX Designer</span></div>
+      <div class="comp-tile"><span class="comp-name">UNIK</span><span class="comp-role">Product Designer</span></div>
+      <div class="comp-tile"><span class="comp-name">Cossette</span><span class="comp-role">UX Designer</span></div>
+      <div class="comp-tile"><span class="comp-name">FCINQ</span><span class="comp-role">Designer</span></div>
+      <div class="comp-tile"><span class="comp-name">M&amp;C Saatchi Paris</span><span class="comp-role">UX Designer</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="wrap">
+    <div class="proj-head reveal">
+      <div class="tag">Quelques projets</div>
+      <h2>Ce que j'ai conçu.</h2>
+    </div>
+
+    <!-- Project 1 — Épargne -->
+    <div class="proj-card reveal" style="margin-bottom:16px">
+      <div class="proj-info">
+        <div>
+          <div class="proj-meta">2024–2025 · Desjardins · Lead UX</div>
+          <div class="proj-title">Projets épargnes</div>
+          <div class="proj-desc">Refonte complète des expériences d'épargne — estimation du fonds d'urgence, recommandation produit et projection de retraite personnalisée.</div>
+          <div class="proj-tags">
+            <span class="proj-tag">UX Research</span>
+            <span class="proj-tag">Product Design</span>
+            <span class="proj-tag">Blueprint</span>
+          </div>
+        </div>
+        <a href="#" class="proj-link">Découvrir le projet</a>
+      </div>
+      <div class="proj-visual" style="background:rgba(255,255,255,.02)">
+        <div class="proj-phone" style="background:#000;width:210px">
+          <div style="height:16px;background:#0d0d0d"></div>
+          <div style="padding:14px 12px;background:#000;min-height:320px;display:flex;flex-direction:column">
+            <div style="font-size:9px;color:rgba(255,255,255,.4);margin-bottom:4px">Retraite · 65 ans</div>
+            <div style="font-size:20px;font-weight:800;color:#fff;letter-spacing:-0.025em">711 750 $</div>
+            <div style="height:3px;background:rgba(255,255,255,.08);border-radius:2px;margin:8px 0"><div style="height:3px;background:#0051ff;border-radius:2px;width:75%"></div></div>
+            <svg viewBox="0 0 180 90" fill="none" style="flex:1;margin-top:8px;width:100%" preserveAspectRatio="none">
+              <defs><linearGradient id="pg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0051ff" stop-opacity=".3"/><stop offset="100%" stop-color="#0051ff" stop-opacity="0"/></linearGradient></defs>
+              <path d="M0,88 C30,80 70,55 90,35 C115,12 145,4 180,2 L180,90 L0,90 Z" fill="url(#pg)"/>
+              <path d="M0,88 C30,80 70,55 90,35 C115,12 145,4 180,2" stroke="#0051ff" stroke-width="2"/>
+              <path d="M0,88 C30,85 70,70 90,58 C115,44 145,32 180,24" stroke="rgba(255,255,255,.2)" stroke-width="1.5" stroke-dasharray="3 2"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 2 — Financement -->
+    <div class="proj-card light reveal" style="margin-bottom:16px;grid-template-columns:1fr 1fr">
+      <div class="proj-visual" style="background:#e8ecf8;order:-1">
+        <div class="proj-phone proj-phone-light" style="background:#fff;width:200px">
+          <div style="height:14px;background:#f0f0f0"></div>
+          <div style="padding:12px 10px;background:white;min-height:300px">
+            <div style="font-size:9px;color:#6b6b6b;margin-bottom:8px;font-weight:600">Sélection de taux</div>
+            <div style="background:#fff;border:2px solid #0051ff;border-radius:10px;padding:10px;margin-bottom:6px;box-shadow:0 2px 12px rgba(0,81,255,.15)">
+              <div style="font-size:9px;font-weight:700;color:#0051ff;margin-bottom:3px">PROMO</div>
+              <div style="font-size:20px;font-weight:800;color:#0051ff;letter-spacing:-0.025em">6,80 %</div>
+            </div>
+            <div style="background:#f5f5f7;border-radius:10px;padding:10px;margin-bottom:10px">
+              <div style="font-size:18px;font-weight:700;color:#111">1,00 %</div>
+            </div>
+            <div style="background:#0051ff;border-radius:8px;padding:9px;text-align:center">
+              <div style="font-size:10px;font-weight:700;color:#fff">Choisir et continuer</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="proj-info">
+        <div>
+          <div class="proj-meta proj-meta-light">2025 · Desjardins · Lead UX</div>
+          <div class="proj-title proj-title-dark">Financement particuliers</div>
+          <div class="proj-desc proj-desc-dark">Refonte complète des parcours de financement — prêts personnels, cartes de crédit, lignes de crédit et prêts hypothécaires. De la sélection de partenaire à la conception des expériences.</div>
+          <div class="proj-tags">
+            <span class="proj-tag proj-tag-dark">UX Strategy</span>
+            <span class="proj-tag proj-tag-dark">Co-création</span>
+            <span class="proj-tag proj-tag-dark">Product Design</span>
+          </div>
+        </div>
+        <a href="#" class="proj-link proj-link-dark">Découvrir le projet</a>
+      </div>
+    </div>
+
+    <!-- Project 3 — Vision Banking -->
+    <div class="proj-card reveal">
+      <div class="proj-info">
+        <div>
+          <div class="proj-meta">2024 · Desjardins · Lead UX</div>
+          <div class="proj-title">Vision Banking</div>
+          <div class="proj-desc">Conception d'une vision cible pour la prochaine génération de l'application bancaire — gestion financière personnelle et accompagnement proactif intelligent.</div>
+          <div class="proj-tags">
+            <span class="proj-tag">Vision Produit</span>
+            <span class="proj-tag">Innovation</span>
+            <span class="proj-tag">Fintech</span>
+          </div>
+        </div>
+        <a href="#" class="proj-link">Découvrir le projet</a>
+      </div>
+      <div class="proj-visual" style="background:rgba(0,81,255,.06)">
+        <div class="proj-phone" style="background:#1c1c1e;width:200px">
+          <div style="height:14px;background:#0d0d0d"></div>
+          <div style="padding:12px 10px;background:#1c1c1e;min-height:300px">
+            <div style="font-size:9px;color:rgba(255,255,255,.4);margin-bottom:6px">Vision Banking</div>
+            <div style="font-size:14px;font-weight:700;color:#fff;margin-bottom:10px">Bonjour, César</div>
+            <div style="background:linear-gradient(135deg,#2E2935,#0051ff44);border-radius:10px;padding:12px;color:#fff;margin-bottom:8px">
+              <div style="font-size:8px;color:rgba(255,255,255,.5)">Solde total</div>
+              <div style="font-size:18px;font-weight:800;letter-spacing:-0.02em">42 810 $</div>
+            </div>
+            <div style="background:rgba(0,81,255,.15);border:1px solid rgba(0,81,255,.3);border-radius:10px;padding:10px">
+              <div style="font-size:9px;color:#0051ff;font-weight:700;margin-bottom:2px">Insight</div>
+              <div style="font-size:10px;color:rgba(255,255,255,.7)">+200 $/mois épargne possible</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OTHER PROJECTS -->
+<section id="other">
+  <div class="other-inner">
+    <div class="other-h reveal">D'autres projets sur présentation</div>
+    <div class="other-grid">
+      <div class="other-card reveal"><div class="other-date">Desjardins · 2024</div><div class="other-title">Accueil app gestion financière</div><div class="other-sub">Refonte de l'expérience d'accueil mobile</div></div>
+      <div class="other-card reveal d1"><div class="other-date">Desjardins · 2024</div><div class="other-title">Vidéo conseil financier</div><div class="other-sub">Parcours conseil hybride digital</div></div>
+      <div class="other-card reveal d2"><div class="other-date">Desjardins · 2023</div><div class="other-title">Choix de limite de crédit</div><div class="other-sub">Expérience de recommandation produit</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- THINKING -->
+<section id="thinking">
+  <div class="wrap">
+    <div class="think-head reveal">
+      <h2>Some thinking.</h2>
+    </div>
+    <div class="think-grid">
+      <div class="think-card reveal">
+        <div class="think-img" style="background:rgba(0,81,255,.06)"><div style="width:72px;height:52px;background:rgba(0,81,255,.15);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:monospace;font-size:9px;color:rgba(0,81,255,.5)">.fig</div></div>
+        <div class="think-body"><div class="think-cat">Design Systems</div><div class="think-title">La gouvernance d'un design system à grande échelle</div><div class="think-excerpt">Comment structurer un design system dans une organisation de 5 000 personnes tout en préservant cohérence et vélocité.</div></div>
+      </div>
+      <div class="think-card reveal d1">
+        <div class="think-img" style="background:rgba(29,131,72,.06)"><div style="width:72px;height:52px;background:rgba(29,131,72,.12);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:monospace;font-size:9px;color:rgba(29,131,72,.6)">.pdf</div></div>
+        <div class="think-body"><div class="think-cat">Fintech UX</div><div class="think-title">Ce que les banques peuvent apprendre de Wealthsimple</div><div class="think-excerpt">Une analyse des patterns UX qui font le succès des néo-banques et comment les transposer dans des contextes réglementés.</div></div>
+      </div>
+      <div class="think-card reveal d2">
+        <div class="think-img" style="background:#f5f5f7"><div style="width:72px;height:52px;background:rgba(0,0,0,.06);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:monospace;font-size:9px;color:rgba(0,0,0,.3)">.pptx</div></div>
+        <div class="think-body"><div class="think-cat">Process</div><div class="think-title">Aligner légal, produit et UX en 3 jours d'atelier</div><div class="think-excerpt">La méthode pour transformer des contraintes réglementaires en décisions de design actionnables.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="reveal">
+        <div class="tag" style="color:rgba(255,255,255,.25)">More about me?</div>
+        <h2 class="about-h">Designer,<br/>conférencier,<br/>et <em>collectionneur.</em></h2>
+      </div>
+      <div class="about-items reveal d2">
+        <div class="about-item">
+          <div class="about-lbl">Conférences</div>
+          <p class="about-txt">J'aime partager la manière dont le design se pense et se construit. J'ai organisé des conférences et des ateliers de création, en collaboration avec des intervenants internationaux, notamment Interference et 24h Design.</p>
+        </div>
+        <div class="about-item">
+          <div class="about-lbl">Art et livres</div>
+          <p class="about-txt">Ayant vécu plusieurs années rue de Seine, j'ai grandi au contact des grandes galeries parisiennes. Aujourd'hui, je collectionne des objets d'art, avec une attention particulière pour l'œuvre de Gustave Doré.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-grid reveal">
+    <div class="c-id">
       <div>
-        <h1>César Monchablon</h1>
-        <p>Quelques mots pour te présenter en une phrase.</p>
+        <div class="c-name">César<br>Monchablon</div>
+        <div class="c-role">Lead UX Designer · Montréal</div>
       </div>
-    </header>
-    <section id="about">
-      <h2>À propos</h2>
-      <p>Bienvenue ! Je suis César. Remplace ce paragraphe par une présentation de toi : ce que tu fais, ce qui t'intéresse, ce sur quoi tu travailles en ce moment.</p>
-      <p>Tu peux ajouter ici ton parcours, tes domaines d'expertise, ou simplement quelques pensées qui te ressemblent.</p>
-    </section>
-    <section id="projects">
-      <h2>Projets</h2>
-      <div class="projects">
-        <article class="card"><h3>Projet 1 — Titre</h3><p>Brève description : qu'est-ce que c'est, ton rôle, ce que tu en as appris.</p></article>
-        <article class="card"><h3>Projet 2 — Titre</h3><p>Une autre réalisation. Tu peux mettre un lien vers une démo ou un repo GitHub.</p></article>
-        <article class="card"><h3>Projet 3 — Titre</h3><p>Ajoute, retire ou réorganise ces cartes selon ce que tu veux mettre en avant.</p></article>
+      <div class="c-links">
+        <a href="https://linkedin.com" class="c-link" target="_blank">LinkedIn ↗</a>
+        <a href="/cdn-cgi/l/email-protection#127177617360527f7d7c717a73707e7d7c3c717d7f" class="c-link">Gmail ↗</a>
       </div>
-    </section>
-    <section id="contact">
-      <h2>Contact</h2>
-      <div class="links">
-        <a href="mailto:cesar.monchablon@gmail.com">Email</a>
-        <a href="https://github.com/Deatpool" target="_blank" rel="noopener">GitHub</a>
-        <a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
-        <a href="https://x.com/" target="_blank" rel="noopener">X / Twitter</a>
-      </div>
-    </section>
-    <footer><p>© <span id="year"></span> César Monchablon — Hébergé avec GitHub Pages.</p></footer>
-  </main>
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+    </div>
+    <div class="c-cta">
+      <div class="c-cta-lbl">Vous avez un projet ?</div>
+      <div class="c-cta-h">Discutons.</div>
+      <a href="/cdn-cgi/l/email-protection#dfbcbaacbead9fb2b0b1bcb7bebdb3b0b1f1bcb0b2" class="c-btn">Prendre contact →</a>
+    </div>
+  </div>
+  <div class="footer-bar">
+    <span class="footer-copy">© 2025 César Monchablon</span>
+    <span class="footer-copy">Lead UX Designer · Montréal, Canada</span>
+  </div>
+</section>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// ─── REVEAL ───────────────────────────────────────────────────
+const obs = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting){e.target.classList.add('rin');obs.unobserve(e.target)} }), {threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// ─── FEATURE TABS ─────────────────────────────────────────────
+document.querySelectorAll('.feat-tab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const i = btn.dataset.tab;
+    document.querySelectorAll('.feat-tab').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.feat-panel').forEach(p => { p.classList.remove('fp-active'); p.style.display='none'; });
+    btn.classList.add('active');
+    const panel = document.getElementById('fp'+i);
+    panel.style.display='grid';
+    requestAnimationFrame(() => panel.classList.add('fp-active'));
+  });
+});
+// Init: hide non-active panels
+document.querySelectorAll('.feat-panel:not(.fp-active)').forEach(p => p.style.display='none');
+
+// ─── SCROLL PHONE ─────────────────────────────────────────────
+(function(){
+  const section = document.getElementById('scroll-hero');
+  const iph     = document.getElementById('iphPortrait');
+  const iphWrap = document.getElementById('iphWrap');
+  const hand    = document.getElementById('handWrap');
+  const titleEl = document.getElementById('shTitle');
+  const labelEl = document.getElementById('shLabel');
+  const screens = [0,1,2].map(i => document.getElementById('ps'+i));
+  const dots    = [0,1,2].map(i => document.getElementById('sd'+i));
+
+  const TITLES = [
+    {label:'Navigation en direct',title:'Concevoir des expériences<br>qui ont du sens.'},
+    {label:'Épargne · Desjardins',title:'Des projections claires<br>pour chaque décision.'},
+    {label:'Financement particuliers',title:'Choisir son taux<br>en toute confiance.'},
+  ];
+  const HAND = [{x:52,y:82},{x:50,y:67},{x:50,y:65}];
+
+  function lerp(a,b,t){return a+(b-a)*t}
+  function clamp(v,lo,hi){return Math.min(hi,Math.max(lo,v))}
+  function ease(t){return t<.5?2*t*t:-1+(4-2*t)*t}
+
+  let cur=-1,tapT=null;
+
+  function setPhase(ph){
+    if(ph===cur)return; cur=ph;
+    titleEl.innerHTML=TITLES[ph].title;
+    labelEl.textContent=TITLES[ph].label;
+    if(!labelEl.classList.contains('sl-in'))labelEl.classList.add('sl-in');
+    screens.forEach((s,i)=>{s.classList.remove('psa','psu');if(i===ph)s.classList.add('psa');else if(i<ph)s.classList.add('psu')});
+    dots.forEach((d,i)=>d.classList.toggle('sda',i===ph));
+    hand.classList.remove('htap');void hand.offsetWidth;hand.classList.add('htap');
+    clearTimeout(tapT);tapT=setTimeout(()=>hand.classList.remove('htap'),500);
+  }
+
+  function posHand(ph,lt){
+    const np=Math.min(2,ph+1),t=ease(lt);
+    const hx=lerp(HAND[ph].x,HAND[np].x,t);
+    const hy=lerp(HAND[ph].y,HAND[np].y,t);
+    const ir=iph.getBoundingClientRect(),wr=iphWrap.getBoundingClientRect();
+    hand.style.left=(ir.left-wr.left+ir.width*hx/100)+'px';
+    hand.style.top=(ir.top-wr.top+ir.height*hy/100)+'px';
+  }
+
+  let raf=null;
+  window.addEventListener('scroll',()=>{
+    if(raf)return;
+    raf=requestAnimationFrame(()=>{
+      raf=null;
+      const total=section.offsetHeight-window.innerHeight;
+      if(total<=0)return;
+      const p=clamp(window.scrollY-section.offsetTop,0,total)/total;
+      const pf=p*3,ph=Math.min(2,Math.floor(pf)),lt=pf-Math.floor(pf);
+      setPhase(ph);posHand(ph,lt);
+    });
+  },{passive:true});
+
+  setTimeout(()=>{setPhase(0);posHand(0,0)},80);
+})();
+</script>
 </body>
 </html>
